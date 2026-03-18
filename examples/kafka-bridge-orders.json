@@ -1,0 +1,20 @@
+{
+  "name": "kafka-bridge-orders",
+  "config": {
+    "connector.class": "io.github.kafka.connect.bridge.KafkaBridgeSinkConnector",
+    "tasks.max": "1",
+    "topics": "orders.created,orders.updated",
+    "target.topic": "orders-replica",
+    "target.bootstrap.servers": "target-kafka.example.com:9092",
+    "target.security.protocol": "PLAINTEXT",
+    "topic.mapping": "orders.created:orders-created-replica,orders.updated:orders-updated-replica",
+    "copy.headers": "true",
+    "preserve.timestamp": "true",
+    "error.topic": "orders-bridge-errors",
+    "fail.on.serialization.error": "true",
+    "key.converter": "org.apache.kafka.connect.converters.ByteArrayConverter",
+    "key.converter.schemas.enable": "false",
+    "value.converter": "org.apache.kafka.connect.converters.ByteArrayConverter",
+    "value.converter.schemas.enable": "false"
+  }
+}
